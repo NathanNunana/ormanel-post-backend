@@ -1,11 +1,11 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const postRoute = require("./router/posts");
-const authRoute = require("./router/auth");
+const authRoute = require("./router/users");
 const { MongoClient } = require("mongodb");
 const app = express();
 
-require("dotenv").config()
+require("dotenv").config();
 
 // connection url
 const uri = process.env.DB_CONN;
