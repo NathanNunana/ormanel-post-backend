@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const asyncWrapper = require("../middlewares/async_wrapper");
 
 const {
   savePost,
@@ -8,12 +9,12 @@ const {
   updatePost,
 } = require("../controllers/posts");
 
-router.post("/post", savePost);
+router.route("/post").post(asyncWrapper(savePost));
 
-router.get("/allposts", loadPost);
+router.route("/allposts").get(asyncWrapper(loadPost));
 
-router.delete("/posts/remove/:id", removePost);
+router.route("/posts/remove/:id").delete(asyncWrapper(removePost));
 
-router.patch("/posts/update/:id", updatePost);
+router.route("/posts/update/:id").patch(asyncWrapper(updatePost));
 
 module.exports = router;

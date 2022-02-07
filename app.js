@@ -10,13 +10,10 @@ require("dotenv").config();
 // middlewares
 app.use(bodyParser.json());
 
-// external routes
-app.use("/", postRoute);
-app.use("/user", authRoute);
-
 // connection url
 const uri = process.env.DB_CONN;
 
+// server port
 const port = process.env.PORT || 3000;
 
 async function startServer() {
@@ -34,9 +31,14 @@ async function startServer() {
       next();
     });
 
+    // external routes
+    app.use("/", postRoute);
+    app.use("/user", authRoute);
+
     // listening on port 3000
-    await app.listen(port);
-    console.log(`server started on port ${port}!`);
+    app.listen(port, ()=>{
+      console.log(`server started on port ${port}!`);
+    });
   } catch (error) {
     console.error;
   }

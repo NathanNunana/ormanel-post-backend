@@ -16,5 +16,7 @@ async function register(req, res) {
 async function logout(req, res) {}
 
 module.exports = {
-    login, register, logout
-}
+  login,
+  register,
+  logout,
+};
