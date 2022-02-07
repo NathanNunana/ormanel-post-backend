@@ -13,10 +13,15 @@ async function register(req, res) {
   res.status(200).json({ success: true });
 }
 
+function homeRoute(req, res) {
+  res.json(req.user);
+}
+
 async function logout(req, res) {}
 
 module.exports = {
   login,
   register,
   logout,
+  homeRoute
 };

@@ -2,11 +2,9 @@ const express = require("express");
 const router = express.Router();
 const asyncWrapper = require("../middlewares/async_wrapper");
 const authenticateToken = require("../middlewares/jwt_auth");
-const { login, register, logout } = require("../controllers/users");
+const { login, register, logout, homeRoute } = require("../controllers/users");
 
-router.get("/", authenticateToken, (req, res) => {
-  res.json(req.user);
-});
+router.route("/").get(authenticateToken, homeRoute);
 
 router.route("/login").post(asyncWrapper(login));
 router.route("/register").post(asyncWrapper(register));
