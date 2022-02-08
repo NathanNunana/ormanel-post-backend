@@ -20,14 +20,15 @@ module.exports = class User {
   }
   static async login(email, password, users) {
     const user = await users.findOne({ email: email });
-    if (user && bcrypt.compare(password, user.password)) {
+    if (user && await bcrypt.compare(password, user.password)) {
       const payload = {
-        user:{
-          id: user._id
-        }
+        id: user._id,
+        username: user.name
       }
       const accessToken = jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET)
       return accessToken
+    }else{
+      return null;
     }
   }
 };
