@@ -9,6 +9,7 @@ require("dotenv").config();
 
 // middlewares
 app.use(bodyParser.json());
+app.use(express.static("public"))
 
 // server port
 const port = process.env.PORT || 3000;
@@ -21,7 +22,6 @@ async function startServer() {
     // collections
     const posts = db.collection("posts");
     const users = db.collection("users");
-    console.log(posts, users)
 
     app.use((req, res, next) => {
       req.posts = posts;
