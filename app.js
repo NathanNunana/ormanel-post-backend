@@ -10,20 +10,18 @@ require("dotenv").config();
 // middlewares
 app.use(bodyParser.json());
 
-// connection url
-const uri = process.env.DB_CONN;
-
 // server port
 const port = process.env.PORT || 3000;
 
 async function startServer() {
   try {
     // db connection
-    const db = await connectDB(uri);
-
+    const db = await connectDB(process.env.DB_CONN);
+    console.log(db)
     // collections
     const posts = db.collection("posts");
     const users = db.collection("users");
+    console.log(posts, users)
 
     app.use((req, res, next) => {
       req.posts = posts;
@@ -31,7 +29,7 @@ async function startServer() {
       next();
     });
 
-    // external routes
+    // // external routes
     app.use("/", postRoute);
     app.use("/user", authRoute);
 

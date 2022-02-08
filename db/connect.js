@@ -1,8 +1,11 @@
-const { MongoClient } = require("mongodb")
+const { MongoClient } = require("mongodb");
 
 const connectDB = async (url) => {
-    const client = await MongoClient.connect(url);
-    return client.db("interviewdb");
-}
+  const client = await MongoClient.connect(url, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  });
+  return client.db("ormsocial");
+};
 
-module.exports = connectDB
+module.exports = connectDB;
