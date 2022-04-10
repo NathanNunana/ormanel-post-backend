@@ -7,6 +7,6 @@ const { login, register, logout, homeRoute } = require("../controllers/users");
 router.route("/").get(authenticateToken, homeRoute);
 router.route("/login").post(asyncWrapper(login));
 router.route("/register").post(asyncWrapper(register));
-router.route("logout").get(asyncWrapper(logout));
+router.route("/logout").get(asyncWrapper(logout));
 
 module.exports = router;
