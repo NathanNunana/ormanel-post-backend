@@ -28,6 +28,20 @@ const port = process.env.PORT || 3000;
 // starting swaggerDocs
 swaggerDocs(app);
 
+// websocket
+io.on("connection", (socket) => {
+  console.log(`user joined ai chatroom`);
+  socket.broadcast.emit("bot", `you joined the discussion board`);
+  socket.on("message", (message) => {
+    io.emit("message", message);
+    console.log(message);
+  });
+  socket.on("disconnect", () => {
+    console.log("user is disconnected");
+    io.emit("message", "user disconnected");
+  });
+});
+
 async function startServer() {
   try {
     // db connection

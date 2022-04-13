@@ -3,19 +3,28 @@ const swaggerJsDoc = require("swagger-jsdoc");
 
 const options = {
   definition: {
-    openapi: "3.0.3",
+    openapi: "3.0.0",
     info: {
       title: "Blog API",
       version: "1.0.0",
       description: "A SIMPLE API TO POST, DELETE, UPDATE, COMMENT AND JOIN IN ON LIVE BLOG DISCUSSIONS",
     },
-    // servers: [
-    //   {
-    //     url: "https://localhost:3000",
-    //   },
-    // ],
+    components: {
+      securitySchemas:{
+        bearerAuth:{
+          type: "http",
+          scheme: "bearer",
+          bearerFormat: "JWT"
+        },
+      },
+    },
+    security:[
+      {
+        bearerAuth:{}
+      }
+    ]
   },
-  apis: ["../routes/*.js", "../models/*.js"],
+  apis: ['./routes/*.js', './models/*.js'],
 };
 
 const specs = swaggerJsDoc(options);

@@ -1,8 +1,10 @@
+const path = require("path")
+
 function sendMessage(req, res) {
   console.log("send messages");
   const name = req.query.name;
   const chatRoom = req.query.chatroom;
-  io.on("connection", (socket) => {
+  req.io.on("connection", (socket) => {
     console.log(`user joined ${chatRoom} chatroom`);
     socket.broadcast.emit("bot", `${name} joined the discussion board`);
     socket.on("message", (message) => {
@@ -17,7 +19,7 @@ function sendMessage(req, res) {
 }
 
 function allDiscussions(req, res) {
-  res.render("home");
+  // res.sendFile(path.join("../", "public","index.html"));
 }
 
 module.exports = {
